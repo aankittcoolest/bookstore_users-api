@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  go_users:
+    build:
+      context: ./
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/go/src/github.com/aankittcoolest/bookstore_users-api
+    environment:
+      mysql_users_username: root
+      mysql_users_password: example
+      mysql_users_host: db
+      mysql_users_schema: users_db
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - 3306:3306
